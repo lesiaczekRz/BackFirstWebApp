@@ -1,13 +1,16 @@
 package app.controller;
 
 import app.model.Invoice;
+import app.model.InvoiceNumbering;
 import app.model.InvoiceRepository;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@SuppressWarnings("unused")
 public class InvoiceController {
 
     @Autowired
@@ -25,7 +28,9 @@ public class InvoiceController {
     }
 
     @PostMapping("/invoices")
-    Invoice newInvoice(@RequestParam Invoice newInvoice) {
-        return newInvoice;
+    @NotNull
+    Invoice newInvoice(@RequestBody Invoice newInvoice) {
+        newInvoice.setNumberInvoice(new InvoiceNumbering(repository).getNextNumberInvoice());
+        return repository.save(newInvoice);
     }
 }

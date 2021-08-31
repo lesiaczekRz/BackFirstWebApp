@@ -6,8 +6,11 @@ import java.util.Calendar;
 
 public class InvoiceNumbering {
 
-    @Autowired
-    InvoiceRepository repository;
+    private final InvoiceRepository repository;
+
+    public InvoiceNumbering(InvoiceRepository repository) {
+        this.repository = repository;
+    }
 
     /**
      * Pobiera następny numer faktury

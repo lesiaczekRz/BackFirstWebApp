@@ -1,6 +1,8 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,7 +21,8 @@ public class Invoice {
     @Column(nullable = false)
     private Float amount;
 
-    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATE_DATE_TIME", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date date;
 
     Invoice() {}
