@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @SuppressWarnings("unused")
+@CrossOrigin(origins = "http://localhost")
 public class InvoiceController {
 
     @Autowired
