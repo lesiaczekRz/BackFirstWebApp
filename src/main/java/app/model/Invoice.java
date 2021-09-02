@@ -1,9 +1,11 @@
 package app.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Objects;
 
+@Table(name = "Invoice")
 @Entity
 public class Invoice {
 
@@ -17,16 +19,17 @@ public class Invoice {
     @Column(nullable = false)
     private Float amount;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CREATE_DATE_TIME", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date date;
+    @Column(nullable = false)
+    private LocalDateTime date;
 
-    Invoice() {}
+    Invoice() {
+        setDate(null);
+    }
 
-    public Invoice(String numberInvoice, Float amount, Date date) {
-        this.numberInvoice = numberInvoice;
-        this.amount = amount;
-        this.date = date;
+    public Invoice(String numberInvoice, Float amount, LocalDateTime date) {
+        setNumberInvoice(numberInvoice);
+        setAmount(amount);
+        setDate(date);
     }
 
     public Long getId() {
@@ -45,12 +48,12 @@ public class Invoice {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(LocalDateTime date) {
+        this.date = Objects.requireNonNullElseGet(date, () -> LocalDateTime.now(ZoneId.of("Europe/Warsaw")));
     }
 
     public String getNumberInvoice() {
@@ -59,11 +62,6 @@ public class Invoice {
 
     public void setNumberInvoice(String numberInvoice) {
         this.numberInvoice = numberInvoice;
-    }
-
-    @PrePersist
-    private void onInsert() {
-
     }
 
     @Override

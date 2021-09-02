@@ -1,9 +1,6 @@
 package app.controller;
 
-import app.model.Invoice;
-import app.model.InvoiceNumbering;
-import app.model.InvoiceRepository;
-import com.sun.istack.NotNull;
+import app.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,13 +21,27 @@ public class InvoiceController {
     @GetMapping("/invoices/{id}")
     Invoice one(@PathVariable Long id) {
         return repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new InvoiceNotFoundException(id));
     }
 
     @PostMapping("/invoices")
-    @NotNull
     Invoice newInvoice(@RequestBody Invoice newInvoice) {
         newInvoice.setNumberInvoice(new InvoiceNumbering(repository).getNextNumberInvoice());
         return repository.save(newInvoice);
+    }
+
+    @DeleteMapping("/invoices/{id}")
+    void deleteInvoice(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
+
+    @PutMapping("/invoices/{id}")
+    Invoice replaceInvoice(@RequestBody Invoice newInvoice, @PathVariable Long id) {
+        return repository.findById(id)
+                .map(invoice -> {
+                    invoice.setAmount(newInvoice.getAmount());
+                    return repository.save(invoice);
+                })
+                .orElseThrow(() -> new InvoiceNotFoundException(id));
     }
 }
