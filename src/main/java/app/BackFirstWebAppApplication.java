@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Locale;
 
 @SpringBootApplication
-public class FrontFirstWebAppApplication {
+public class BackFirstWebAppApplication {
 
 	public static void main(String[] args) {
 		setUp();
-		SpringApplication.run(FrontFirstWebAppApplication.class, args);
+		SpringApplication.run(BackFirstWebAppApplication.class, args);
 	}
 
 	private static void setUp() {
