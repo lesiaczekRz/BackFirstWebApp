@@ -24,15 +24,17 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase() {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        User user1 = userRepository.save(new User("Test1"));
+        User user2 = userRepository.save(new User("Test2"));
         return args -> {
-            log.info("Preloading " + userRepository.save(new User(1L, "Test1")));
-            log.info("Preloading " + userRepository.save(new User(2L, "Test2")));
+            log.info("Preloading " + user1.toString());
+            log.info("Preloading " + user2.toString());
 
             log.info("Preloading " + invoiceRepository.save(new Invoice("1/2021", 10.50f,
-                    LocalDateTime.parse("2021-08-02T00:00"), userRepository.getById(1L))));
+                    LocalDateTime.parse("2021-08-02T00:00"), user1)));
 
-//            log.info("Preloading " + invoiceRepository.save(new Invoice("2/2021", 1100.00f,
-//                    LocalDateTime.parse("2021-08-01T00:00"), userRepository.findById(2L))));
+            log.info("Preloading " + invoiceRepository.save(new Invoice("2/2021", 1100.00f,
+                    LocalDateTime.parse("2021-08-01T00:00"), user2)));
         };
     }
 

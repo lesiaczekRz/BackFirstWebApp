@@ -1,7 +1,6 @@
 package app.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Table(name = "user")
@@ -19,8 +18,7 @@ public class User {
 
     }
 
-    public User(Long id, String name) {
-        this.id = id;
+    public User(String name) {
         this.name = name;
     }
 
