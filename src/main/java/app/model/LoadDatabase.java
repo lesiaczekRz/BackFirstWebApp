@@ -19,23 +19,23 @@ public class LoadDatabase {
     InvoiceRepository invoiceRepository;
 
     @Autowired
-    UserRepository userRepository;
+    UserInvoiceRepository userInvoiceRepository;
 
-    @Bean
-    CommandLineRunner initDatabase() {
-        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        User user1 = userRepository.save(new User("Test1"));
-        User user2 = userRepository.save(new User("Test2"));
-        return args -> {
-            log.info("Preloading " + user1.toString());
-            log.info("Preloading " + user2.toString());
-
-            log.info("Preloading " + invoiceRepository.save(new Invoice("1/2021", 10.50f,
-                    LocalDateTime.parse("2021-08-02T00:00"), user1)));
-
-            log.info("Preloading " + invoiceRepository.save(new Invoice("2/2021", 1100.00f,
-                    LocalDateTime.parse("2021-08-01T00:00"), user2)));
-        };
-    }
+//    @Bean
+//    CommandLineRunner initDatabase() {
+//        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+//        UserInvoice userInvoice1 = userInvoiceRepository.save(new UserInvoice("Test1"));
+//        UserInvoice userInvoice2 = userInvoiceRepository.save(new UserInvoice("Test2"));
+//        return args -> {
+//            log.info("Preloading " + userInvoice1.toString());
+//            log.info("Preloading " + userInvoice2.toString());
+//
+//            log.info("Preloading " + invoiceRepository.save(new Invoice("1/2021", 10.50f,
+//                    LocalDateTime.parse("2021-08-02T00:00"), userInvoice1)));
+//
+//            log.info("Preloading " + invoiceRepository.save(new Invoice("2/2021", 1100.00f,
+//                    LocalDateTime.parse("2021-08-01T00:00"), userInvoice2)));
+//        };
+//    }
 
 }

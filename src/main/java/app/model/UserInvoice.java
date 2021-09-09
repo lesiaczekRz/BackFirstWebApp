@@ -3,9 +3,9 @@ package app.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Table(name = "user")
+@Table(name = "user_invoice")
 @Entity
-public class User {
+public class UserInvoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,11 +14,11 @@ public class User {
     @Column(nullable = false, unique = true)
     private String name;
 
-    User() {
+    UserInvoice() {
 
     }
 
-    public User(String name) {
+    public UserInvoice(String name) {
         this.name = name;
     }
 
@@ -42,8 +42,8 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id) && name.equals(user.name);
+        UserInvoice userInvoice = (UserInvoice) o;
+        return id.equals(userInvoice.id) && name.equals(userInvoice.name);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserInvoice{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

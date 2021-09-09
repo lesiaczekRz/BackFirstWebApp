@@ -23,17 +23,17 @@ public class Invoice {
     private LocalDateTime date;
 
     @ManyToOne
-    private User user;
+    private UserInvoice userInvoice;
 
     Invoice() {
         setDate(null);
     }
 
-    public Invoice(String numberInvoice, Float amount, LocalDateTime date, User user) {
+    public Invoice(String numberInvoice, Float amount, LocalDateTime date, UserInvoice userInvoice) {
         setNumberInvoice(numberInvoice);
         setAmount(amount);
         setDate(date);
-        setUser(user);
+        setUser(userInvoice);
     }
 
     public Long getId() {
@@ -68,12 +68,12 @@ public class Invoice {
         this.numberInvoice = numberInvoice;
     }
 
-    public User getUser() {
-        return user;
+    public UserInvoice getUser() {
+        return userInvoice;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserInvoice userInvoice) {
+        this.userInvoice = userInvoice;
     }
 
     @Override
@@ -82,12 +82,12 @@ public class Invoice {
         if (o == null || getClass() != o.getClass()) return false;
         Invoice invoice = (Invoice) o;
         return id.equals(invoice.id) && numberInvoice.equals(invoice.numberInvoice) && amount.equals(invoice.amount)
-                && date.equals(invoice.date) && user.equals(invoice.user);
+                && date.equals(invoice.date) && userInvoice.equals(invoice.userInvoice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, numberInvoice, amount, date, user);
+        return Objects.hash(id, numberInvoice, amount, date, userInvoice);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class Invoice {
                 ", numberInvoice='" + numberInvoice + '\'' +
                 ", amount=" + amount +
                 ", date=" + date +
-                ", user=" + user +
+                ", userInvoice=" + userInvoice +
                 '}';
     }
 }
