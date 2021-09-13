@@ -13,6 +13,9 @@ public class InvoiceController {
     @Autowired
     InvoiceRepository repository;
 
+    @Autowired
+    InvoiceNumbering invoiceNumbering;
+
     @GetMapping("/invoices")
     List<Invoice> all() {
         return repository.findAll();
@@ -26,7 +29,7 @@ public class InvoiceController {
 
     @PostMapping("/invoices")
     Invoice newInvoice(@RequestBody Invoice newInvoice) {
-        newInvoice.setNumberInvoice(new InvoiceNumbering(repository).getNextNumberInvoice());
+        newInvoice.setNumberInvoice(invoiceNumbering.getNextNumberInvoice());
         return repository.save(newInvoice);
     }
 

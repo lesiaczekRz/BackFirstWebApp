@@ -1,13 +1,16 @@
 package app.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 
+@Component
 public class InvoiceNumbering {
 
     private final InvoiceRepository repository;
 
+    @Autowired
     public InvoiceNumbering(InvoiceRepository repository) {
         this.repository = repository;
     }
